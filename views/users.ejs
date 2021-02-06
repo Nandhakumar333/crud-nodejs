@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+    <title>User List</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+</head>
+<body>
+    <div class="container">
+        <div class="row text-center">
+            <h1>User List</h1>
+        </div>
+        <div class="text-center">
+            <h4><a href="/user" class="btn btn-info">Add <i class="fas fa-user-plus"></i></a></h4>
+            
+        </div>
+       <% if (flash.message.length>0) { %>
+        <div class="alert <%= flash.color %> alert-dismissible fade show" role="alert">
+            <strong><%= flash.message %></strong>
+            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+          </div>
+       <% } %>
+           
+          
+       <div class="row mt-1">
+                <% data.name.forEach(element => { %>
+                    
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 col-12">
+                <div class="card shadow border border-primary mt-1">
+                <h5 class="card-header bg-primary text-white"><%= element.email %></h5>
+                <div class="card-body">
+                <div class="table-responsive-sm">
+                 <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                        <th scope="col">Name</th>
+                          <td><%= element.name %></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Email</th>
+                            <td><%= element.email %></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Doctor Name</th>
+                            <td><%= element.doctor_name %></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Symptom</th>
+                            <td><%= element.symptom %></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Gender</th>
+                            <td><%= element.gender %></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Time</th>
+                            <td><%= element.time %></td>
+                        </tr>
+                        
+                      </tbody>
+                 </table>
+                </div>
+                <div class="text-center">
+                    <a href="<%= element.id %>" class="btn btn-success" >Edit <i class="fas fa-user-edit"></i></a>
+                    <form action="<%= element.id %>?_method=DELETE" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-danger">Delete <i class="fas fa-user-times"></i></button></form>
+                    
+                </div>
+                </div>
+                <div class="card-footer">
+                    <p class="text-muted"><%= element.date %></p>
+                </div>
+            </div>
+        </div>
+                <% }) %>
+            </div>
+       
+    </div>
+  
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js" integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD" crossorigin="anonymous"></script>
+   <script>
+       gsap.from(".card",{duration:1,x:'-350%',y:'-150%',rotation:-90,stagger:.5})
+       gsap.from('.card-body',{duration:1,opacity:0,delay:1,stagger:.5})
+       let timeline=gsap.timeline();
+   </script>
+</body>
+</html>
